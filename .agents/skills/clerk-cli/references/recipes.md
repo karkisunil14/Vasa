@@ -39,7 +39,7 @@ clerk users open user_abc123 --print     # print the URL instead of opening
 # running the real command.
 clerk users create \
   --email alice@example.com \
-  --password "$TEMP_USER_PASSWORD" \
+  --password "${TEMP_USER_PASSWORD:?set TEMP_USER_PASSWORD before running this}" \
   --first-name Alice \
   --last-name Doe \
   --dry-run
@@ -47,19 +47,19 @@ clerk users create \
 # After confirming the preview looks right:
 clerk users create \
   --email alice@example.com \
-  --password "$TEMP_USER_PASSWORD" \
+  --password "${TEMP_USER_PASSWORD:?set TEMP_USER_PASSWORD before running this}" \
   --first-name Alice \
   --last-name Doe \
   --yes
 
 # Equivalent raw BAPI call. Use only when curated flags don't cover a field.
 # Same rule applies: preview with --dry-run and confirm before the real call.
-clerk api /users -d '{
-  "email_address": ["alice@example.com"],
-  "password": "SuperSecret123!",
-  "first_name": "Alice",
-  "last_name": "Doe"
-}' --dry-run
+clerk api /users -d "{
+  \"email_address\": [\"alice@example.com\"],
+  \"password\": \"${TEMP_USER_PASSWORD:?set TEMP_USER_PASSWORD before running this}\",
+  \"first_name\": \"Alice\",
+  \"last_name\": \"Doe\"
+}" --dry-run
 
 # Update (PATCH merges)
 clerk api /users/user_abc123 -X PATCH -d '{"first_name":"Alicia"}'

@@ -23,6 +23,8 @@ export interface Unit {
   order: number;
   title: string;
   description: string;
+  /** Hero illustration shown on the Lessons screen for this unit. */
+  image: string;
 }
 
 export interface VocabularyItem {
@@ -65,6 +67,8 @@ export interface Lesson {
   type: LessonType;
   xpReward: number;
   goal: string;
+  /** Thumbnail/hero illustration representing this lesson's topic. */
+  image: string;
   vocabulary: VocabularyItem[];
   phrases: Phrase[];
   activities: Activity[];

@@ -1,3 +1,4 @@
+import { placeholderImage } from "@/lib/images";
 import { Lesson } from "@/types/learning";
 
 export const lessons: Lesson[] = [
@@ -14,6 +15,7 @@ export const lessons: Lesson[] = [
     type: "audio",
     xpReward: 10,
     goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("spanish-greetings"),
     vocabulary: [
       { id: "es-v1", term: "Hola", translation: "Hello" },
       { id: "es-v2", term: "Buenos días", translation: "Good morning" },
@@ -57,6 +59,7 @@ export const lessons: Lesson[] = [
     type: "chat",
     xpReward: 15,
     goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("spanish-introductions"),
     vocabulary: [
       { id: "es-v6", term: "Me llamo", translation: "My name is" },
       { id: "es-v7", term: "¿Cómo te llamas?", translation: "What is your name?" },
@@ -99,6 +102,7 @@ export const lessons: Lesson[] = [
     type: "vocabulary",
     xpReward: 15,
     goal: "Recognize and use five common everyday nouns.",
+    image: placeholderImage("spanish-everyday-words"),
     vocabulary: [
       { id: "es-v10", term: "Agua", translation: "Water" },
       { id: "es-v11", term: "Casa", translation: "House" },
@@ -142,6 +146,7 @@ export const lessons: Lesson[] = [
     type: "video",
     xpReward: 10,
     goal: "Recognize common cultural greetings and customs.",
+    image: placeholderImage("spanish-culture-corner"),
     vocabulary: [
       { id: "es-v15", term: "Siesta", translation: "Afternoon rest" },
       { id: "es-v16", term: "Tapas", translation: "Small shared dishes" },
@@ -177,6 +182,7 @@ export const lessons: Lesson[] = [
     type: "audio",
     xpReward: 10,
     goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("french-greetings"),
     vocabulary: [
       { id: "fr-v1", term: "Bonjour", translation: "Hello" },
       { id: "fr-v2", term: "Bonsoir", translation: "Good evening" },
@@ -220,6 +226,7 @@ export const lessons: Lesson[] = [
     type: "chat",
     xpReward: 15,
     goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("french-introductions"),
     vocabulary: [
       { id: "fr-v6", term: "Je m'appelle", translation: "My name is" },
       { id: "fr-v7", term: "Comment tu t'appelles?", translation: "What is your name?" },
@@ -262,6 +269,7 @@ export const lessons: Lesson[] = [
     type: "vocabulary",
     xpReward: 15,
     goal: "Recognize and use five common everyday nouns.",
+    image: placeholderImage("french-everyday-words"),
     vocabulary: [
       { id: "fr-v10", term: "Eau", translation: "Water" },
       { id: "fr-v11", term: "Maison", translation: "House" },
@@ -309,6 +317,7 @@ export const lessons: Lesson[] = [
     type: "audio",
     xpReward: 10,
     goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("japanese-greetings"),
     vocabulary: [
       { id: "ja-v1", term: "こんにちは (Konnichiwa)", translation: "Hello" },
       { id: "ja-v2", term: "おはよう (Ohayou)", translation: "Good morning" },
@@ -357,6 +366,7 @@ export const lessons: Lesson[] = [
     type: "chat",
     xpReward: 15,
     goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("japanese-introductions"),
     vocabulary: [
       { id: "ja-v6", term: "私は...です (Watashi wa ... desu)", translation: "I am ..." },
       { id: "ja-v7", term: "お名前は？(Onamae wa?)", translation: "What is your name?" },
@@ -403,6 +413,7 @@ export const lessons: Lesson[] = [
     type: "vocabulary",
     xpReward: 15,
     goal: "Recognize and use five common everyday nouns.",
+    image: placeholderImage("japanese-everyday-words"),
     vocabulary: [
       { id: "ja-v10", term: "水 (Mizu)", translation: "Water" },
       { id: "ja-v11", term: "家 (Ie)", translation: "House" },
@@ -438,6 +449,370 @@ export const lessons: Lesson[] = [
   },
 
   // ---------------------------------------------------------------------
+  // Korean — korean-basics-1
+  // ---------------------------------------------------------------------
+  {
+    id: "korean-greetings",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 1,
+    title: "Greetings",
+    description: "Learn how to say hello and goodbye in Korean.",
+    type: "audio",
+    xpReward: 10,
+    goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("korean-greetings"),
+    vocabulary: [
+      { id: "ko-v1", term: "안녕하세요 (Annyeonghaseyo)", translation: "Hello" },
+      { id: "ko-v2", term: "안녕히 가세요 (Annyeonghi gaseyo)", translation: "Goodbye" },
+      { id: "ko-v3", term: "감사합니다 (Gamsahamnida)", translation: "Thank you" },
+      { id: "ko-v4", term: "죄송합니다 (Joesonghamnida)", translation: "Sorry" },
+      { id: "ko-v5", term: "네 (Ne)", translation: "Yes" },
+    ],
+    phrases: [
+      { id: "ko-p1", text: "만나서 반갑습니다 (Mannaseo bangapseumnida)", translation: "Nice to meet you" },
+      { id: "ko-p2", text: "잘 지내요? (Jal jinaeyo?)", translation: "How are you?" },
+    ],
+    activities: [
+      {
+        id: "ko-a1",
+        type: "multiple-choice",
+        prompt: "How do you say 'Hello' in Korean?",
+        options: [
+          "안녕하세요 (Annyeonghaseyo)",
+          "감사합니다 (Gamsahamnida)",
+          "죄송합니다 (Joesonghamnida)",
+          "네 (Ne)",
+        ],
+        correctAnswer: "안녕하세요 (Annyeonghaseyo)",
+      },
+      {
+        id: "ko-a2",
+        type: "listen",
+        prompt: "Listen to the audio and type what you hear.",
+        correctAnswer: "감사합니다 (Gamsahamnida)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly, encouraging Korean teacher speaking with a beginner student. Speak slowly, use simple sentences, gently correct mistakes, and praise effort. Keep the conversation focused on greetings.",
+      greeting: "안녕하세요! 저는 당신의 한국어 선생님이에요. 배울 준비 됐나요?",
+      focusAreas: ["pronunciation", "greetings vocabulary", "confidence building"],
+    },
+  },
+  {
+    id: "korean-introductions",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 2,
+    title: "Introductions",
+    description: "Introduce yourself and ask someone's name.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("korean-introductions"),
+    vocabulary: [
+      { id: "ko-v6", term: "제 이름은 ...입니다 (Je ireumeun ... imnida)", translation: "My name is ..." },
+      { id: "ko-v7", term: "이름이 뭐예요? (Ireumi mwoyeyo?)", translation: "What is your name?" },
+      { id: "ko-v8", term: "저는 ...에서 왔어요 (Jeoneun ... eseo wasseoyo)", translation: "I am from ..." },
+    ],
+    phrases: [
+      { id: "ko-p3", text: "제 이름은 민수입니다 (Je ireumeun Minsu imnida)", translation: "My name is Minsu" },
+      { id: "ko-p4", text: "어디에서 왔어요? (Eodieseo wasseoyo?)", translation: "Where are you from?" },
+    ],
+    activities: [
+      {
+        id: "ko-a3",
+        type: "translate",
+        prompt: "Translate: 'My name is Jiho'",
+        correctAnswer: "제 이름은 지호입니다 (Je ireumeun Jiho imnida)",
+      },
+      {
+        id: "ko-a4",
+        type: "multiple-choice",
+        prompt: "What does '이름이 뭐예요?' mean?",
+        options: ["How are you?", "What is your name?", "Where are you from?", "Goodbye"],
+        correctAnswer: "What is your name?",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Korean conversation partner helping a beginner practice introductions. Ask the student's name and where they are from, respond warmly, and gently correct grammar mistakes.",
+      greeting: "다시 안녕하세요! 자기소개를 연습해봐요. 이름이 뭐예요?",
+      focusAreas: ["self-introduction", "question formation", "listening comprehension"],
+    },
+  },
+  {
+    id: "korean-numbers",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 3,
+    title: "Numbers",
+    description: "Count from one to five in Korean.",
+    type: "vocabulary",
+    xpReward: 10,
+    goal: "Recognize and use the numbers 1 through 5.",
+    image: placeholderImage("korean-numbers"),
+    vocabulary: [
+      { id: "ko-v9", term: "하나 (Hana)", translation: "One" },
+      { id: "ko-v10", term: "둘 (Dul)", translation: "Two" },
+      { id: "ko-v11", term: "셋 (Set)", translation: "Three" },
+      { id: "ko-v12", term: "넷 (Net)", translation: "Four" },
+      { id: "ko-v13", term: "다섯 (Daseot)", translation: "Five" },
+    ],
+    phrases: [{ id: "ko-p5", text: "하나, 둘, 셋! (Hana, dul, set!)", translation: "One, two, three!" }],
+    activities: [
+      {
+        id: "ko-a5",
+        type: "match",
+        prompt: "Match each Korean number to its English meaning.",
+        options: ["하나 (Hana)", "둘 (Dul)", "셋 (Set)", "넷 (Net)"],
+        correctAnswer: "하나 (Hana) - One",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Korean vocabulary coach. Quiz the student on numbers one through five using short counting exercises.",
+      greeting: "숫자를 연습해봐요. 준비 됐나요?",
+      focusAreas: ["numbers", "recall speed"],
+    },
+  },
+  {
+    id: "korean-family",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 4,
+    title: "Family & Friends",
+    description: "Talk about your family members.",
+    type: "vocabulary",
+    xpReward: 15,
+    goal: "Name close family members in Korean.",
+    image: placeholderImage("korean-family"),
+    vocabulary: [
+      { id: "ko-v14", term: "가족 (Gajok)", translation: "Family" },
+      { id: "ko-v15", term: "엄마 (Eomma)", translation: "Mom" },
+      { id: "ko-v16", term: "아빠 (Appa)", translation: "Dad" },
+      { id: "ko-v17", term: "친구 (Chingu)", translation: "Friend" },
+    ],
+    phrases: [{ id: "ko-p6", text: "이 분은 제 엄마예요 (I buneun je eommayeyo)", translation: "This is my mom" }],
+    activities: [
+      {
+        id: "ko-a6",
+        type: "translate",
+        prompt: "Translate: 'Friend'",
+        correctAnswer: "친구 (Chingu)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Korean vocabulary coach helping a beginner talk about family. Use simple sentences and encourage the student to describe their own family.",
+      greeting: "가족에 대해 이야기해봐요!",
+      focusAreas: ["family vocabulary", "sentence usage"],
+    },
+  },
+  {
+    id: "korean-food-drink",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 5,
+    title: "Food & Drink",
+    description: "Order food and talk about what you like to eat.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Ask for food and drink and say what tastes good.",
+    image: placeholderImage("korean-food-drink"),
+    vocabulary: [
+      { id: "ko-v18", term: "물 (Mul)", translation: "Water" },
+      { id: "ko-v19", term: "밥 (Bap)", translation: "Rice / Meal" },
+      { id: "ko-v20", term: "커피 (Keopi)", translation: "Coffee" },
+      { id: "ko-v21", term: "맛있어요 (Masisseoyo)", translation: "It's delicious" },
+    ],
+    phrases: [{ id: "ko-p7", text: "물 주세요 (Mul juseyo)", translation: "Water, please" }],
+    activities: [
+      {
+        id: "ko-a7",
+        type: "multiple-choice",
+        prompt: "How do you say 'delicious' in Korean?",
+        options: ["물 (Mul)", "맛있어요 (Masisseoyo)", "밥 (Bap)", "커피 (Keopi)"],
+        correctAnswer: "맛있어요 (Masisseoyo)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Korean conversation partner practicing food and drink vocabulary with a beginner. Ask what they want to eat or drink and react warmly.",
+      greeting: "무엇을 먹고 싶어요?",
+      focusAreas: ["food vocabulary", "ordering phrases"],
+    },
+  },
+  {
+    id: "korean-time-days",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 6,
+    title: "Time & Days",
+    description: "Talk about today, tomorrow, and the days of the week.",
+    type: "vocabulary",
+    xpReward: 10,
+    goal: "Use basic time words in a sentence.",
+    image: placeholderImage("korean-time-days"),
+    vocabulary: [
+      { id: "ko-v22", term: "오늘 (Oneul)", translation: "Today" },
+      { id: "ko-v23", term: "내일 (Naeil)", translation: "Tomorrow" },
+      { id: "ko-v24", term: "어제 (Eoje)", translation: "Yesterday" },
+      { id: "ko-v25", term: "월요일 (Woryoil)", translation: "Monday" },
+    ],
+    phrases: [{ id: "ko-p8", text: "오늘 뭐 해요? (Oneul mwo haeyo?)", translation: "What are you doing today?" }],
+    activities: [
+      {
+        id: "ko-a8",
+        type: "translate",
+        prompt: "Translate: 'Tomorrow'",
+        correctAnswer: "내일 (Naeil)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Korean vocabulary coach practicing time words with a beginner student.",
+      greeting: "시간 표현을 연습해봐요!",
+      focusAreas: ["time vocabulary", "sentence usage"],
+    },
+  },
+  {
+    id: "korean-weather",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 7,
+    title: "Weather",
+    description: "Describe the weather in Korean.",
+    type: "video",
+    xpReward: 10,
+    goal: "Describe hot, cold, and rainy weather.",
+    image: placeholderImage("korean-weather"),
+    vocabulary: [
+      { id: "ko-v26", term: "날씨 (Nalssi)", translation: "Weather" },
+      { id: "ko-v27", term: "더워요 (Deowoyo)", translation: "It's hot" },
+      { id: "ko-v28", term: "추워요 (Chuwoyo)", translation: "It's cold" },
+      { id: "ko-v29", term: "비가 와요 (Biga wayo)", translation: "It's raining" },
+    ],
+    phrases: [{ id: "ko-p9", text: "오늘 날씨 어때요? (Oneul nalssi eottaeyo?)", translation: "How's the weather today?" }],
+    activities: [
+      {
+        id: "ko-a9",
+        type: "multiple-choice",
+        prompt: "How do you say 'It's raining' in Korean?",
+        options: ["더워요 (Deowoyo)", "추워요 (Chuwoyo)", "비가 와요 (Biga wayo)", "날씨 (Nalssi)"],
+        correctAnswer: "비가 와요 (Biga wayo)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a Korean culture and language guide narrating a short video lesson about the weather. Keep explanations brief and beginner-appropriate.",
+      greeting: "오늘의 날씨에 대해 알아볼까요?",
+      focusAreas: ["weather vocabulary", "listening comprehension"],
+    },
+  },
+  {
+    id: "korean-directions",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 8,
+    title: "Directions",
+    description: "Ask for and give simple directions.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Use left, right, here, and there in a sentence.",
+    image: placeholderImage("korean-directions"),
+    vocabulary: [
+      { id: "ko-v30", term: "왼쪽 (Oenjjok)", translation: "Left" },
+      { id: "ko-v31", term: "오른쪽 (Oreunjjok)", translation: "Right" },
+      { id: "ko-v32", term: "여기 (Yeogi)", translation: "Here" },
+      { id: "ko-v33", term: "저기 (Jeogi)", translation: "There" },
+    ],
+    phrases: [{ id: "ko-p10", text: "왼쪽으로 가세요 (Oenjjogeuro gaseyo)", translation: "Go to the left" }],
+    activities: [
+      {
+        id: "ko-a10",
+        type: "translate",
+        prompt: "Translate: 'Right'",
+        correctAnswer: "오른쪽 (Oreunjjok)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Korean conversation partner practicing directions with a beginner. Ask for and give simple directions.",
+      greeting: "길을 물어보는 연습을 해봐요!",
+      focusAreas: ["direction vocabulary", "question formation"],
+    },
+  },
+  {
+    id: "korean-shopping",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 9,
+    title: "Shopping",
+    description: "Ask about prices and buy something.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Ask how much something costs and buy an item.",
+    image: placeholderImage("korean-shopping"),
+    vocabulary: [
+      { id: "ko-v34", term: "얼마예요? (Eolmayeyo?)", translation: "How much is it?" },
+      { id: "ko-v35", term: "이거 주세요 (Igeo juseyo)", translation: "Give me this, please" },
+      { id: "ko-v36", term: "싸요 (Ssayo)", translation: "It's cheap" },
+      { id: "ko-v37", term: "비싸요 (Bissayo)", translation: "It's expensive" },
+    ],
+    phrases: [{ id: "ko-p11", text: "이거 얼마예요? (Igeo eolmayeyo?)", translation: "How much is this?" }],
+    activities: [
+      {
+        id: "ko-a11",
+        type: "multiple-choice",
+        prompt: "How do you ask 'How much is it?' in Korean?",
+        options: ["얼마예요? (Eolmayeyo?)", "싸요 (Ssayo)", "비싸요 (Bissayo)", "이거 주세요 (Igeo juseyo)"],
+        correctAnswer: "얼마예요? (Eolmayeyo?)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Korean conversation partner practicing shopping phrases with a beginner. Role-play a simple shop interaction.",
+      greeting: "쇼핑할 때 쓰는 표현을 연습해봐요!",
+      focusAreas: ["shopping vocabulary", "numbers"],
+    },
+  },
+  {
+    id: "korean-hobbies",
+    unitId: "korean-basics-1",
+    languageId: "korean",
+    order: 10,
+    title: "Hobbies",
+    description: "Talk about the things you enjoy doing.",
+    type: "vocabulary",
+    xpReward: 15,
+    goal: "Name a few common hobbies in Korean.",
+    image: placeholderImage("korean-hobbies"),
+    vocabulary: [
+      { id: "ko-v38", term: "취미 (Chwimi)", translation: "Hobby" },
+      { id: "ko-v39", term: "영화 (Yeonghwa)", translation: "Movie" },
+      { id: "ko-v40", term: "음악 (Eumak)", translation: "Music" },
+      { id: "ko-v41", term: "운동 (Undong)", translation: "Exercise" },
+    ],
+    phrases: [{ id: "ko-p12", text: "제 취미는 음악 듣기예요 (Je chwimineun eumak deutgiyeyo)", translation: "My hobby is listening to music" }],
+    activities: [
+      {
+        id: "ko-a12",
+        type: "translate",
+        prompt: "Translate: 'Movie'",
+        correctAnswer: "영화 (Yeonghwa)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Korean vocabulary coach helping a beginner talk about hobbies. Encourage the student to share their own hobbies.",
+      greeting: "취미에 대해 이야기해볼까요?",
+      focusAreas: ["hobby vocabulary", "sentence usage"],
+    },
+  },
+
+  // ---------------------------------------------------------------------
   // German — german-basics-1
   // ---------------------------------------------------------------------
   {
@@ -450,6 +825,7 @@ export const lessons: Lesson[] = [
     type: "audio",
     xpReward: 10,
     goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("german-greetings"),
     vocabulary: [
       { id: "de-v1", term: "Hallo", translation: "Hello" },
       { id: "de-v2", term: "Guten Morgen", translation: "Good morning" },
@@ -493,6 +869,7 @@ export const lessons: Lesson[] = [
     type: "chat",
     xpReward: 15,
     goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("german-introductions"),
     vocabulary: [
       { id: "de-v6", term: "Ich heiße", translation: "My name is" },
       { id: "de-v7", term: "Wie heißt du?", translation: "What is your name?" },
@@ -535,6 +912,7 @@ export const lessons: Lesson[] = [
     type: "vocabulary",
     xpReward: 15,
     goal: "Recognize and use five common everyday nouns.",
+    image: placeholderImage("german-everyday-words"),
     vocabulary: [
       { id: "de-v10", term: "Wasser", translation: "Water" },
       { id: "de-v11", term: "Haus", translation: "House" },
@@ -568,6 +946,365 @@ export const lessons: Lesson[] = [
       focusAreas: ["everyday vocabulary", "sentence usage", "recall speed"],
     },
   },
+
+  // ---------------------------------------------------------------------
+  // Chinese — chinese-basics-1
+  // ---------------------------------------------------------------------
+  {
+    id: "chinese-greetings",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 1,
+    title: "Greetings",
+    description: "Learn how to say hello and goodbye in Mandarin.",
+    type: "audio",
+    xpReward: 10,
+    goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("chinese-greetings"),
+    vocabulary: [
+      { id: "zh-v1", term: "你好 (Nǐ hǎo)", translation: "Hello" },
+      { id: "zh-v2", term: "再见 (Zàijiàn)", translation: "Goodbye" },
+      { id: "zh-v3", term: "谢谢 (Xièxiè)", translation: "Thank you" },
+      { id: "zh-v4", term: "对不起 (Duìbùqǐ)", translation: "Sorry" },
+      { id: "zh-v5", term: "是 (Shì)", translation: "Yes" },
+    ],
+    phrases: [
+      { id: "zh-p1", text: "很高兴认识你 (Hěn gāoxìng rènshi nǐ)", translation: "Nice to meet you" },
+      { id: "zh-p2", text: "你好吗？(Nǐ hǎo ma?)", translation: "How are you?" },
+    ],
+    activities: [
+      {
+        id: "zh-a1",
+        type: "multiple-choice",
+        prompt: "How do you say 'Hello' in Mandarin?",
+        options: ["你好 (Nǐ hǎo)", "再见 (Zàijiàn)", "谢谢 (Xièxiè)", "对不起 (Duìbùqǐ)"],
+        correctAnswer: "你好 (Nǐ hǎo)",
+      },
+      {
+        id: "zh-a2",
+        type: "listen",
+        prompt: "Listen to the audio and type what you hear.",
+        correctAnswer: "谢谢 (Xièxiè)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly, encouraging Mandarin Chinese teacher speaking with a beginner student. Speak slowly, use simple sentences, gently correct mistakes, and praise effort. Keep the conversation focused on greetings.",
+      greeting: "你好！我是你的中文老师。准备好学习了吗？",
+      focusAreas: ["pronunciation", "greetings vocabulary", "confidence building"],
+    },
+  },
+  {
+    id: "chinese-introductions",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 2,
+    title: "Introductions",
+    description: "Introduce yourself and ask someone's name.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("chinese-introductions"),
+    vocabulary: [
+      { id: "zh-v6", term: "我叫... (Wǒ jiào...)", translation: "My name is ..." },
+      { id: "zh-v7", term: "你叫什么名字？(Nǐ jiào shénme míngzì?)", translation: "What is your name?" },
+      { id: "zh-v8", term: "我来自... (Wǒ láizì...)", translation: "I am from ..." },
+    ],
+    phrases: [
+      { id: "zh-p3", text: "我叫李明 (Wǒ jiào Lǐ Míng)", translation: "My name is Li Ming" },
+      { id: "zh-p4", text: "你从哪里来？(Nǐ cóng nǎlǐ lái?)", translation: "Where are you from?" },
+    ],
+    activities: [
+      {
+        id: "zh-a3",
+        type: "translate",
+        prompt: "Translate: 'My name is Wei'",
+        correctAnswer: "我叫伟 (Wǒ jiào Wěi)",
+      },
+      {
+        id: "zh-a4",
+        type: "multiple-choice",
+        prompt: "What does '你叫什么名字？' mean?",
+        options: ["How are you?", "What is your name?", "Where are you from?", "Goodbye"],
+        correctAnswer: "What is your name?",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Mandarin conversation partner helping a beginner practice introductions. Ask the student's name and where they are from, respond warmly, and gently correct grammar mistakes.",
+      greeting: "你好，我们再聊聊！练习自我介绍吧。你叫什么名字？",
+      focusAreas: ["self-introduction", "question formation", "listening comprehension"],
+    },
+  },
+  {
+    id: "chinese-numbers",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 3,
+    title: "Numbers",
+    description: "Count from one to five in Mandarin.",
+    type: "vocabulary",
+    xpReward: 10,
+    goal: "Recognize and use the numbers 1 through 5.",
+    image: placeholderImage("chinese-numbers"),
+    vocabulary: [
+      { id: "zh-v9", term: "一 (Yī)", translation: "One" },
+      { id: "zh-v10", term: "二 (Èr)", translation: "Two" },
+      { id: "zh-v11", term: "三 (Sān)", translation: "Three" },
+      { id: "zh-v12", term: "四 (Sì)", translation: "Four" },
+      { id: "zh-v13", term: "五 (Wǔ)", translation: "Five" },
+    ],
+    phrases: [{ id: "zh-p5", text: "一，二，三！(Yī, èr, sān!)", translation: "One, two, three!" }],
+    activities: [
+      {
+        id: "zh-a5",
+        type: "match",
+        prompt: "Match each Mandarin number to its English meaning.",
+        options: ["一 (Yī)", "二 (Èr)", "三 (Sān)", "四 (Sì)"],
+        correctAnswer: "一 (Yī) - One",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Mandarin vocabulary coach. Quiz the student on numbers one through five using short counting exercises.",
+      greeting: "我们来练习数字吧，准备好了吗？",
+      focusAreas: ["numbers", "recall speed"],
+    },
+  },
+  {
+    id: "chinese-family",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 4,
+    title: "Family & Friends",
+    description: "Talk about your family members.",
+    type: "vocabulary",
+    xpReward: 15,
+    goal: "Name close family members in Mandarin.",
+    image: placeholderImage("chinese-family"),
+    vocabulary: [
+      { id: "zh-v14", term: "家人 (Jiārén)", translation: "Family" },
+      { id: "zh-v15", term: "妈妈 (Māma)", translation: "Mom" },
+      { id: "zh-v16", term: "爸爸 (Bàba)", translation: "Dad" },
+      { id: "zh-v17", term: "朋友 (Péngyǒu)", translation: "Friend" },
+    ],
+    phrases: [{ id: "zh-p6", text: "这是我妈妈 (Zhè shì wǒ māma)", translation: "This is my mom" }],
+    activities: [
+      {
+        id: "zh-a6",
+        type: "translate",
+        prompt: "Translate: 'Friend'",
+        correctAnswer: "朋友 (Péngyǒu)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Mandarin vocabulary coach helping a beginner talk about family. Use simple sentences and encourage the student to describe their own family.",
+      greeting: "我们来聊聊家人吧！",
+      focusAreas: ["family vocabulary", "sentence usage"],
+    },
+  },
+  {
+    id: "chinese-food-drink",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 5,
+    title: "Food & Drink",
+    description: "Order food and talk about what you like to eat.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Ask for food and drink and say what tastes good.",
+    image: placeholderImage("chinese-food-drink"),
+    vocabulary: [
+      { id: "zh-v18", term: "水 (Shuǐ)", translation: "Water" },
+      { id: "zh-v19", term: "米饭 (Mǐfàn)", translation: "Rice" },
+      { id: "zh-v20", term: "咖啡 (Kāfēi)", translation: "Coffee" },
+      { id: "zh-v21", term: "好吃 (Hǎochī)", translation: "Delicious" },
+    ],
+    phrases: [{ id: "zh-p7", text: "请给我水 (Qǐng gěi wǒ shuǐ)", translation: "Water, please" }],
+    activities: [
+      {
+        id: "zh-a7",
+        type: "multiple-choice",
+        prompt: "How do you say 'delicious' in Mandarin?",
+        options: ["水 (Shuǐ)", "好吃 (Hǎochī)", "米饭 (Mǐfàn)", "咖啡 (Kāfēi)"],
+        correctAnswer: "好吃 (Hǎochī)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Mandarin conversation partner practicing food and drink vocabulary with a beginner. Ask what they want to eat or drink and react warmly.",
+      greeting: "你想吃什么？",
+      focusAreas: ["food vocabulary", "ordering phrases"],
+    },
+  },
+  {
+    id: "chinese-time-days",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 6,
+    title: "Time & Days",
+    description: "Talk about today, tomorrow, and the days of the week.",
+    type: "vocabulary",
+    xpReward: 10,
+    goal: "Use basic time words in a sentence.",
+    image: placeholderImage("chinese-time-days"),
+    vocabulary: [
+      { id: "zh-v22", term: "今天 (Jīntiān)", translation: "Today" },
+      { id: "zh-v23", term: "明天 (Míngtiān)", translation: "Tomorrow" },
+      { id: "zh-v24", term: "昨天 (Zuótiān)", translation: "Yesterday" },
+      { id: "zh-v25", term: "星期一 (Xīngqīyī)", translation: "Monday" },
+    ],
+    phrases: [{ id: "zh-p8", text: "你今天做什么？(Nǐ jīntiān zuò shénme?)", translation: "What are you doing today?" }],
+    activities: [
+      {
+        id: "zh-a8",
+        type: "translate",
+        prompt: "Translate: 'Tomorrow'",
+        correctAnswer: "明天 (Míngtiān)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Mandarin vocabulary coach practicing time words with a beginner student.",
+      greeting: "我们来练习时间表达吧！",
+      focusAreas: ["time vocabulary", "sentence usage"],
+    },
+  },
+  {
+    id: "chinese-weather",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 7,
+    title: "Weather",
+    description: "Describe the weather in Mandarin.",
+    type: "video",
+    xpReward: 10,
+    goal: "Describe hot, cold, and rainy weather.",
+    image: placeholderImage("chinese-weather"),
+    vocabulary: [
+      { id: "zh-v26", term: "天气 (Tiānqì)", translation: "Weather" },
+      { id: "zh-v27", term: "热 (Rè)", translation: "Hot" },
+      { id: "zh-v28", term: "冷 (Lěng)", translation: "Cold" },
+      { id: "zh-v29", term: "下雨 (Xiàyǔ)", translation: "Raining" },
+    ],
+    phrases: [{ id: "zh-p9", text: "今天天气怎么样？(Jīntiān tiānqì zěnmeyàng?)", translation: "How's the weather today?" }],
+    activities: [
+      {
+        id: "zh-a9",
+        type: "multiple-choice",
+        prompt: "How do you say 'raining' in Mandarin?",
+        options: ["热 (Rè)", "冷 (Lěng)", "下雨 (Xiàyǔ)", "天气 (Tiānqì)"],
+        correctAnswer: "下雨 (Xiàyǔ)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a Mandarin culture and language guide narrating a short video lesson about the weather. Keep explanations brief and beginner-appropriate.",
+      greeting: "我们来看看今天的天气吧！",
+      focusAreas: ["weather vocabulary", "listening comprehension"],
+    },
+  },
+  {
+    id: "chinese-directions",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 8,
+    title: "Directions",
+    description: "Ask for and give simple directions.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Use left, right, here, and there in a sentence.",
+    image: placeholderImage("chinese-directions"),
+    vocabulary: [
+      { id: "zh-v30", term: "左边 (Zuǒbiān)", translation: "Left" },
+      { id: "zh-v31", term: "右边 (Yòubiān)", translation: "Right" },
+      { id: "zh-v32", term: "这里 (Zhèlǐ)", translation: "Here" },
+      { id: "zh-v33", term: "那里 (Nàlǐ)", translation: "There" },
+    ],
+    phrases: [{ id: "zh-p10", text: "往左边走 (Wǎng zuǒbiān zǒu)", translation: "Go to the left" }],
+    activities: [
+      {
+        id: "zh-a10",
+        type: "translate",
+        prompt: "Translate: 'Right'",
+        correctAnswer: "右边 (Yòubiān)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Mandarin conversation partner practicing directions with a beginner. Ask for and give simple directions.",
+      greeting: "我们来练习问路吧！",
+      focusAreas: ["direction vocabulary", "question formation"],
+    },
+  },
+  {
+    id: "chinese-shopping",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 9,
+    title: "Shopping",
+    description: "Ask about prices and buy something.",
+    type: "chat",
+    xpReward: 15,
+    goal: "Ask how much something costs and buy an item.",
+    image: placeholderImage("chinese-shopping"),
+    vocabulary: [
+      { id: "zh-v34", term: "多少钱？(Duōshǎo qián?)", translation: "How much is it?" },
+      { id: "zh-v35", term: "我要这个 (Wǒ yào zhège)", translation: "I want this" },
+      { id: "zh-v36", term: "便宜 (Piányí)", translation: "Cheap" },
+      { id: "zh-v37", term: "贵 (Guì)", translation: "Expensive" },
+    ],
+    phrases: [{ id: "zh-p11", text: "这个多少钱？(Zhège duōshǎo qián?)", translation: "How much is this?" }],
+    activities: [
+      {
+        id: "zh-a11",
+        type: "multiple-choice",
+        prompt: "How do you ask 'How much is it?' in Mandarin?",
+        options: ["多少钱？(Duōshǎo qián?)", "便宜 (Piányí)", "贵 (Guì)", "我要这个 (Wǒ yào zhège)"],
+        correctAnswer: "多少钱？(Duōshǎo qián?)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a friendly Mandarin conversation partner practicing shopping phrases with a beginner. Role-play a simple shop interaction.",
+      greeting: "我们来练习购物用语吧！",
+      focusAreas: ["shopping vocabulary", "numbers"],
+    },
+  },
+  {
+    id: "chinese-hobbies",
+    unitId: "chinese-basics-1",
+    languageId: "chinese",
+    order: 10,
+    title: "Hobbies",
+    description: "Talk about the things you enjoy doing.",
+    type: "vocabulary",
+    xpReward: 15,
+    goal: "Name a few common hobbies in Mandarin.",
+    image: placeholderImage("chinese-hobbies"),
+    vocabulary: [
+      { id: "zh-v38", term: "爱好 (Àihào)", translation: "Hobby" },
+      { id: "zh-v39", term: "电影 (Diànyǐng)", translation: "Movie" },
+      { id: "zh-v40", term: "音乐 (Yīnyuè)", translation: "Music" },
+      { id: "zh-v41", term: "运动 (Yùndòng)", translation: "Exercise" },
+    ],
+    phrases: [{ id: "zh-p12", text: "我的爱好是听音乐 (Wǒ de àihào shì tīng yīnyuè)", translation: "My hobby is listening to music" }],
+    activities: [
+      {
+        id: "zh-a12",
+        type: "translate",
+        prompt: "Translate: 'Movie'",
+        correctAnswer: "电影 (Diànyǐng)",
+      },
+    ],
+    aiTeacherPrompt: {
+      systemPrompt:
+        "You are a patient Mandarin vocabulary coach helping a beginner talk about hobbies. Encourage the student to share their own hobbies.",
+      greeting: "我们来聊聊爱好吧！",
+      focusAreas: ["hobby vocabulary", "sentence usage"],
+    },
+  },
   // ---------------------------------------------------------------------
   // Nepali — nepali-basics-1
   // ---------------------------------------------------------------------
@@ -581,6 +1318,7 @@ export const lessons: Lesson[] = [
     type: "audio",
     xpReward: 10,
     goal: "Greet someone and say goodbye confidently.",
+    image: placeholderImage("nepali-greetings"),
     vocabulary: [
       { id: "ne-v1", term: "नमस्ते (Namaste)", translation: "Hello" },
       { id: "ne-v2", term: "शुभ प्रभात (Shubha Prabhat)", translation: "Good morning" },
@@ -637,6 +1375,7 @@ export const lessons: Lesson[] = [
     type: "chat",
     xpReward: 15,
     goal: "Introduce yourself and ask someone's name and origin.",
+    image: placeholderImage("nepali-introductions"),
     vocabulary: [
       { id: "ne-v6", term: "मेरो नाम ... हो (Mero naam ... ho)", translation: "My name is ..." },
       { id: "ne-v7", term: "तपाईंको नाम के हो? (Tapaiko naam ke ho?)", translation: "What is your name?" },
@@ -683,6 +1422,7 @@ export const lessons: Lesson[] = [
     type: "vocabulary",
     xpReward: 15,
     goal: "Recognize and use five common everyday nouns.",
+    image: placeholderImage("nepali-everyday-words"),
     vocabulary: [
       { id: "ne-v10", term: "पानी (Pani)", translation: "Water" },
       { id: "ne-v11", term: "घर (Ghar)", translation: "House" },

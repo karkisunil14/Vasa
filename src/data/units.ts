@@ -1,3 +1,4 @@
+import { placeholderImage } from "@/lib/images";
 import { Unit } from "@/types/learning";
 
 export const units: Unit[] = [
@@ -7,6 +8,7 @@ export const units: Unit[] = [
     order: 1,
     title: "Basics 1",
     description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("spanish-basics-1"),
   },
   {
     id: "french-basics-1",
@@ -14,6 +16,7 @@ export const units: Unit[] = [
     order: 1,
     title: "Basics 1",
     description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("french-basics-1"),
   },
   {
     id: "japanese-basics-1",
@@ -21,6 +24,15 @@ export const units: Unit[] = [
     order: 1,
     title: "Basics 1",
     description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("japanese-basics-1"),
+  },
+  {
+    id: "korean-basics-1",
+    languageId: "korean",
+    order: 1,
+    title: "Basics 1",
+    description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("korean-basics-1"),
   },
   {
     id: "german-basics-1",
@@ -28,6 +40,15 @@ export const units: Unit[] = [
     order: 1,
     title: "Basics 1",
     description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("german-basics-1"),
+  },
+  {
+    id: "chinese-basics-1",
+    languageId: "chinese",
+    order: 1,
+    title: "Basics 1",
+    description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("chinese-basics-1"),
   },
   {
     id: "nepali-basics-1",
@@ -35,6 +56,7 @@ export const units: Unit[] = [
     order: 1,
     title: "Basics 1",
     description: "Greetings, introductions, and everyday words.",
+    image: placeholderImage("nepali-basics-1"),
   },
 ];
 

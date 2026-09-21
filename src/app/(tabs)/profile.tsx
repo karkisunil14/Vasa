@@ -3,13 +3,21 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useLanguageStore } from "@/store/languageStore";
+import { useProgressStore } from "@/store/progressStore";
 
 export default function Profile() {
   const { signOut } = useClerk();
   const clearSelectedLanguage = useLanguageStore((state) => state.clearSelectedLanguage);
+  const resetProgress = useProgressStore((state) => state.resetProgress);
 
   const handleClearLanguage = () => {
     clearSelectedLanguage();
+  };
+
+  const handleSignOut = () => {
+    resetProgress();
+    clearSelectedLanguage();
+    signOut();
   };
 
   return (
@@ -18,7 +26,7 @@ export default function Profile() {
         <Text className="h2 text-ink">Profile</Text>
         <Text className="body-md text-muted mt-2">Coming soon</Text>
 
-        <TouchableOpacity onPress={() => signOut()} className="mt-10">
+        <TouchableOpacity onPress={handleSignOut} className="mt-10">
           <Text className="h4 text-muted">Sign Out</Text>
         </TouchableOpacity>
 

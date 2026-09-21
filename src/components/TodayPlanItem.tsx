@@ -34,6 +34,7 @@ export function TodayPlanItem({
       <Pressable
         onPress={onToggle}
         accessibilityRole="checkbox"
+        accessibilityLabel={`${title}: ${completed ? "Mark incomplete" : "Mark complete"}`}
         accessibilityState={{ checked: completed }}
         className={`h-7 w-7 items-center justify-center rounded-full ${
           completed ? "bg-primary" : "border-2 border-border"

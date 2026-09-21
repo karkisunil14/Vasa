@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
+import { useEffect } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -12,7 +13,7 @@ import { getLanguageById } from "@/data/languages";
 import { getLessonsByUnitId, getLessonsByLanguageId } from "@/data/lessons";
 import { getUnitsByLanguageId } from "@/data/units";
 import { useLanguageStore } from "@/store/languageStore";
-import { useProgressStore } from "@/store/progressStore";
+import { getTodayKey, useProgressStore } from "@/store/progressStore";
 import { colors } from "@/theme";
 import type { Lesson } from "@/types/learning";
 
@@ -51,18 +52,30 @@ export default function Home() {
   const { user } = useUser();
 
   const selectedLanguageId = useLanguageStore((state) => state.selectedLanguageId);
-  const xp = useProgressStore((state) => state.xp);
+  const dailyXp = useProgressStore((state) => state.dailyXp);
+  const dailyXpDate = useProgressStore((state) => state.dailyXpDate);
   const dailyGoalXp = useProgressStore((state) => state.dailyGoalXp);
   const streak = useProgressStore((state) => state.streak);
   const completedLessonIds = useProgressStore((state) => state.completedLessonIds);
   const toggleLessonComplete = useProgressStore((state) => state.toggleLessonComplete);
   const hasHydrated = useProgressStore((state) => state.hasHydrated);
+  const languageHasHydrated = useLanguageStore((state) => state.hasHydrated);
+  const clearSelectedLanguage = useLanguageStore((state) => state.clearSelectedLanguage);
 
   const language = selectedLanguageId ? getLanguageById(selectedLanguageId) : undefined;
 
-  if (!hasHydrated || !language) {
+  useEffect(() => {
+    if (languageHasHydrated && selectedLanguageId && !language) {
+      clearSelectedLanguage();
+      router.replace("/language-selection");
+    }
+  }, [languageHasHydrated, selectedLanguageId, language, clearSelectedLanguage, router]);
+
+  if (!hasHydrated || !languageHasHydrated || !language) {
     return null;
   }
+
+  const todayXp = dailyXpDate === getTodayKey() ? dailyXp : 0;
 
   const units = getUnitsByLanguageId(language.id);
   const currentUnit = units[0];
@@ -73,7 +86,7 @@ export default function Home() {
   const helloWord = greetingLesson?.vocabulary[0]?.term.split(" (")[0] ?? "Hello";
   const firstName = user?.firstName ?? "there";
 
-  const goalProgress = Math.min(100, Math.round((xp / dailyGoalXp) * 100));
+  const goalProgress = Math.min(100, Math.round((todayXp / dailyGoalXp) * 100));
 
   const goToLearn = () => router.push("/(tabs)/learn");
 
@@ -111,7 +124,7 @@ export default function Home() {
           <View className="flex-1 pr-3">
             <Text className="body-md text-muted">Daily goal</Text>
             <Text className="h1 text-ink mt-1 text-[28px]">
-              {xp} <Text className="h3 text-muted">/ {dailyGoalXp} XP</Text>
+              {todayXp} <Text className="h3 text-muted">/ {dailyGoalXp} XP</Text>
             </Text>
             <View className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#F5E1C8]">
               <View
