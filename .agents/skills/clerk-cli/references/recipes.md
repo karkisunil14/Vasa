@@ -33,7 +33,18 @@ clerk users list --email-address alice@example.com
 clerk users open user_abc123
 clerk users open user_abc123 --print     # print the URL instead of opening
 
-# Create a user (preferred; curated flags)
+# Create a user (preferred; curated flags). `clerk users create` writes
+# immediately with no confirmation prompt in any mode - --dry-run is the only
+# preview. Always preview first, then get explicit user confirmation before
+# running the real command.
+clerk users create \
+  --email alice@example.com \
+  --password 'SuperSecret123!' \
+  --first-name Alice \
+  --last-name Doe \
+  --dry-run
+
+# After confirming the preview looks right:
 clerk users create \
   --email alice@example.com \
   --password 'SuperSecret123!' \
@@ -42,12 +53,13 @@ clerk users create \
   --yes
 
 # Equivalent raw BAPI call. Use only when curated flags don't cover a field.
+# Same rule applies: preview with --dry-run and confirm before the real call.
 clerk api /users -d '{
   "email_address": ["alice@example.com"],
   "password": "SuperSecret123!",
   "first_name": "Alice",
   "last_name": "Doe"
-}'
+}' --dry-run
 
 # Update (PATCH merges)
 clerk api /users/user_abc123 -X PATCH -d '{"first_name":"Alicia"}'

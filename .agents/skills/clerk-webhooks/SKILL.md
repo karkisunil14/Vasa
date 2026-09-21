@@ -64,15 +64,15 @@ export async function POST(req: NextRequest) {
   }
 
   if (evt.type === 'user.created') {
-    const { id, email_addresses, first_name, last_name } = evt.data
-    const email = email_addresses[0]?.email_address
+    const { id, email_addresses, primary_email_address_id, first_name, last_name } = evt.data
+    const email = email_addresses.find((e) => e.id === primary_email_address_id)?.email_address
     const name = `${first_name ?? ''} ${last_name ?? ''}`.trim()
     await db.users.create({ data: { clerkId: id, email, name } })
   }
 
   if (evt.type === 'user.updated') {
-    const { id, email_addresses, first_name, last_name } = evt.data
-    const email = email_addresses[0]?.email_address
+    const { id, email_addresses, primary_email_address_id, first_name, last_name } = evt.data
+    const email = email_addresses.find((e) => e.id === primary_email_address_id)?.email_address
     await db.users.update({ where: { clerkId: id }, data: { email, first_name, last_name } })
   }
 
@@ -124,8 +124,8 @@ export async function POST(req: NextRequest) {
   // Step 2: Listen for user.created event
   if (evt.type === 'user.created') {
     // Step 3: Extract user email and name from webhook payload
-    const { id, email_addresses, first_name, last_name } = evt.data
-    const email = email_addresses[0]?.email_address
+    const { id, email_addresses, primary_email_address_id, first_name, last_name } = evt.data
+    const email = email_addresses.find((e) => e.id === primary_email_address_id)?.email_address
     const name = `${first_name ?? ''} ${last_name ?? ''}`.trim()
 
     // Step 4: Call Resend API to send welcome email
@@ -137,13 +137,17 @@ export async function POST(req: NextRequest) {
     })
 
     // Step 5: Post notification to Slack channel
-    await fetch(process.env.SLACK_WEBHOOK_URL!, {
+    const slackResponse = await fetch(process.env.SLACK_WEBHOOK_URL!, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         text: `New user signed up: ${name} (${email})`,
       }),
     })
+    if (!slackResponse.ok) {
+      // Throw so the handler fails and Svix retries delivery
+      throw new Error(`Slack notification failed: ${slackResponse.status}`)
+    }
   }
 
   // Always return 200 to acknowledge receipt
@@ -251,13 +255,15 @@ For manual typing of nested payloads, import the JSON types from your framework'
 ### User events (`user.created`, `user.updated`, `user.deleted`)
 ```typescript
 const {
-  id,                  // Clerk user ID
-  email_addresses,     // array; [0].email_address is primary email
+  id,                       // Clerk user ID
+  email_addresses,          // array; match by id against primary_email_address_id, don't assume [0] is primary
+  primary_email_address_id,
   first_name,
   last_name,
   image_url,
   public_metadata,
 } = evt.data
+const primaryEmail = email_addresses.find((e) => e.id === primary_email_address_id)?.email_address
 ```
 
 ### Organization events (`organization.created`, `organization.updated`, `organization.deleted`)
@@ -312,6 +318,19 @@ const {
 **Retries**: Svix retries failed webhooks on a set schedule (see [Svix Retry Schedule](https://docs.svix.com/retries)). Return 2xx to succeed, 4xx/5xx to retry. Use the `svix-id` header as an idempotency key to deduplicate retried events.
 
 **Replay**: Failed webhooks can be replayed from Dashboard.
+
+**Make side effects idempotent**: Retries and Dashboard replays mean the same event can be delivered more than once. Persist the `svix-id` before doing any work and check it first — no-op if it's already recorded:
+
+```typescript
+const svixId = req.headers.get('svix-id')!
+if (await db.processedEvents.exists({ svixId })) {
+  return new Response('OK', { status: 200 }) // already handled, no-op
+}
+// ...perform the side effects (db writes, emails, Slack messages)...
+await db.processedEvents.create({ data: { svixId } })
+```
+
+Prefer upserts over creates for database writes (`db.users.upsert` keyed on `clerkId`, not `db.users.create`) so a duplicate delivery updates rather than errors or duplicates a row. For non-idempotent third-party calls like sending an email or posting to Slack, the `svix-id` check above is what prevents a retry from sending it twice — an outbox table (record the intended side effect, then a separate worker delivers it) is the more robust pattern if you need stronger guarantees than a single dedup check.
 
 ## Common Pitfalls
 

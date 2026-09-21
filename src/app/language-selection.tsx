@@ -18,6 +18,12 @@ export default function LanguageSelection() {
 
   const [query, setQuery] = useState("");
   const [pendingId, setPendingId] = useState(selectedLanguageId);
+  const [hydratedLanguageId, setHydratedLanguageId] = useState(selectedLanguageId);
+
+  if (selectedLanguageId !== hydratedLanguageId) {
+    setHydratedLanguageId(selectedLanguageId);
+    setPendingId((current) => current ?? selectedLanguageId);
+  }
 
   const filteredLanguages = useMemo(
     () =>
@@ -30,7 +36,7 @@ export default function LanguageSelection() {
   const handleConfirm = () => {
     if (!pendingId) return;
     setSelectedLanguage(pendingId);
-    router.back();
+    router.replace("/");
   };
 
   return (

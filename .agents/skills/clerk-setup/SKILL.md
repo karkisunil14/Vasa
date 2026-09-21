@@ -22,6 +22,8 @@ The `clerk` CLI replaces most Dashboard clicks. Three scenarios cover almost eve
 
 ### Scenario A — New project, new Clerk app
 
+If a global `clerk` binary isn't confirmed on `PATH`, resolve the invocation first — see `clerk-cli` → [Invoking the CLI](../clerk-cli/SKILL.md#invoking-the-cli) (prefers the project's lockfile-matched package runner, e.g. `bunx clerk@latest`, `npx -y clerk@latest`, `pnpm dlx clerk@latest`).
+
 ```bash
 clerk init --framework <next|react|vue|nuxt|astro|react-router|tanstack-react-start|expressjs|fastify|expo> -y
 ```
@@ -300,10 +302,10 @@ Also import the shadcn CSS in your global styles:
 |-------|----------|
 | Missing `await` on `auth()` | In Next.js 15+, `auth()` is async: `const { userId } = await auth()` |
 | Exposing `CLERK_SECRET_KEY` | Never use the secret key in client code; only `NEXT_PUBLIC_*` keys are safe |
-| Missing middleware matcher | Include API routes: `matcher: ['/((?!.*\\..*|_next).*)', '/']` |
+| Missing middleware matcher | Include API routes: `matcher: ['/((?!.*\\..*\|_next).*)', '/']` |
 | ClerkProvider placement | Must be inside `<body>` in root layout (Core 2: could wrap `<html>`) |
 | Auth routes not public | Allow `/sign-in`, `/sign-up` in middleware config |
-| Landing page requires auth | To keep "/" public, exclude it: `matcher: ['/((?!.*\\..*|_next|^/$).*)', '/api/(.*)']` |
+| Landing page requires auth | To keep "/" public, exclude it: `matcher: ['/((?!.*\\..*\|_next\|^/$).*)', '/api/(.*)']` |
 | Wrong import path | Server code uses `@clerk/nextjs/server`, client uses `@clerk/nextjs` |
 | Wrong package name | Use `@clerk/react` not `@clerk/clerk-react` (Core 2 naming) |
 

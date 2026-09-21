@@ -90,13 +90,13 @@ const onPress = async () => {
 if (Platform.OS !== 'ios' && Platform.OS !== 'android') return null
 ```
 
-Always wrap in try/catch and swallow the cancellation codes. On unsupported platforms (web), fall back to `useSSO({ strategy: 'oauth_google' })` or hide the button.
+Always wrap in try/catch and swallow the cancellation codes. On unsupported platforms (web), fall back to `useSSO()`'s `startSSOFlow({ strategy: 'oauth_google' })` or hide the button.
 
 **Next-major note**: native Google sign-in moves to a separate `@clerk/expo-google-signin` package (plus its own config plugin) in the next major version. On v3 the `@clerk/expo/google` import is correct and logs a dev-only migration warning — don't preinstall the new package.
 
 ## Native Apple sign-in — `useSignInWithApple()`
 
-iOS only; dev build only. Requires `npx expo install expo-apple-authentication` and the Sign in with Apple capability (the `expo-apple-authentication` plugin handles the entitlement — add it to `app.json` plugins). Full setup: https://clerk.com/docs/guides/configure/auth-strategies/sign-in-with-apple
+iOS only; dev build only. Requires `npx expo install expo-apple-authentication expo-crypto` (the hook needs `expo-crypto` to generate the nonce) and the Sign in with Apple capability (the `expo-apple-authentication` plugin handles the entitlement — add it to `app.json` plugins). Full setup: https://clerk.com/docs/guides/configure/auth-strategies/sign-in-with-apple
 
 ```tsx
 import { useSignInWithApple } from '@clerk/expo/apple'
@@ -105,7 +105,7 @@ const { startAppleAuthenticationFlow } = useSignInWithApple()
 // identical result handling to the Google hook: setActive on createdSessionId, swallow cancellation
 ```
 
-On Android/web, fall back to `useSSO({ strategy: 'oauth_apple' })` or hide the button. App Store policy: apps offering third-party sign-in on iOS generally must also offer Sign in with Apple — mention this when adding Google-only auth to an iOS app.
+On Android/web, fall back to `useSSO()`'s `startSSOFlow({ strategy: 'oauth_apple' })` or hide the button. App Store policy: apps offering third-party sign-in on iOS generally must also offer Sign in with Apple — mention this when adding Google-only auth to an iOS app.
 
 ## Verification checklist
 

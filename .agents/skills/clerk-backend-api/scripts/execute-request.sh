@@ -13,13 +13,21 @@ set -euo pipefail
 
 # Walk up from $PWD to find .env/.env.local (mirrors Clerk CLI behavior).
 # Stops at the first directory that provides CLERK_SECRET_KEY.
+# Extracts CLERK_SECRET_KEY as data (grep, no `source`) so an untrusted .env
+# file cannot execute arbitrary shell code in this process.
 _dir="$PWD"
 while true; do
   for _envfile in "$_dir/.env" "$_dir/.env.local"; do
-    if [[ -f "$_envfile" ]]; then
-      set -a
-      source "$_envfile"
-      set +a
+    if [[ -f "$_envfile" && -z "${CLERK_SECRET_KEY:-}" ]]; then
+      _line="$(grep -E '^CLERK_SECRET_KEY=' "$_envfile" | tail -n1)"
+      if [[ -n "$_line" ]]; then
+        _value="${_line#CLERK_SECRET_KEY=}"
+        _value="${_value%\"}"
+        _value="${_value#\"}"
+        _value="${_value%\'}"
+        _value="${_value#\'}"
+        export CLERK_SECRET_KEY="$_value"
+      fi
     fi
   done
   [[ -n "${CLERK_SECRET_KEY:-}" ]] && break
@@ -27,7 +35,7 @@ while true; do
   [[ "$_parent" == "$_dir" ]] && break
   _dir="$_parent"
 done
-unset _dir _parent _envfile
+unset _dir _parent _envfile _line _value
 
 # Parse --admin flag
 ADMIN=false
@@ -69,14 +77,21 @@ if [[ "$ADMIN" == false ]]; then
   esac
 fi
 
-# Base URL: use CLERK_REST_API_URL if set, otherwise default to production
-BASE_URL="${CLERK_REST_API_URL:-https://api.clerk.com}"
+# Base URL: use CLERK_BACKEND_API_URL if set, otherwise default to production.
+# Normalize to end in exactly one /v1, whether or not the override already includes it.
+_raw_base="${CLERK_BACKEND_API_URL:-https://api.clerk.com}"
+_raw_base="${_raw_base%/}"
+case "$_raw_base" in
+  */v1) BASE_URL="$_raw_base" ;;
+  *) BASE_URL="${_raw_base}/v1" ;;
+esac
+unset _raw_base
 
 # Build curl command
 CURL_ARGS=(
   -s
   -X "$METHOD_UPPER"
-  "${BASE_URL}/v1${PATH_ARG}"
+  "${BASE_URL}${PATH_ARG}"
   -H "Authorization: Bearer ${CLERK_SECRET_KEY:?CLERK_SECRET_KEY is not set}"
   -H "Content-Type: application/json"
 )

@@ -289,5 +289,5 @@ All three remediation commands are themselves interactive by default: `auth logi
 - **Don't call `clerk link` without `--app` and assume the agent can pick for you** - it only succeeds when silent autolink can determine the app from detected keys.
 - **Don't run `clerk unlink` in agent mode without `--yes`** - it exits with a usage error instead of prompting.
 - **Don't run `clerk config put` without `--dry-run` first** - it's a full replacement and is destructive.
-- **Don't skip `--yes` on mutations and expect them to work** - agent mode disables prompts, so commands that require confirmation will error.
+- **Don't assume a mutation needs `--yes` to run.** Only `unlink` gates on it and errors without it. Every other mutation's confirmation check is skipped outright in agent mode — it executes silently with no prompt and no error, `--yes` or not. `--dry-run` is the only safety net; use it before any real mutation, and get explicit user confirmation before running it for real.
 - **Don't leak secret keys into logs** - the CLI never prints the raw secret key, and you shouldn't either.

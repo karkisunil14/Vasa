@@ -94,12 +94,14 @@ const invitation = await clerkClient.organizations.createOrganizationInvitation(
 **For `plan: 'pro'` and `onboarded: true` — use `public_metadata`** (frontend-readable, server-writable):
 
 ```bash
-curl -s -X PATCH "https://api.clerk.com/v1/users/${USER_ID}" \
+curl -s -X PATCH "https://api.clerk.com/v1/users/${USER_ID}/metadata" \
   -H "Authorization: Bearer $CLERK_SECRET_KEY" \
   -H "Content-Type: application/json" \
   -d '{"public_metadata": {"plan": "pro", "onboarded": true}}' \
   | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'Updated user {d[\"id\"]}: public_metadata={d.get(\"public_metadata\")}')"
 ```
+
+`PATCH /v1/users/{user_id}/metadata` deep-merges the supplied metadata into the existing value — use it for partial updates. Use `PUT /v1/users/{user_id}/metadata` only when you explicitly want to replace a metadata field wholesale. As of API version 2026-05-12, the general `PATCH /v1/users/{user_id}` endpoint no longer accepts metadata fields at all.
 
 **SDK equivalent:**
 
@@ -107,8 +109,8 @@ curl -s -X PATCH "https://api.clerk.com/v1/users/${USER_ID}" \
 import { clerkClient } from '@clerk/nextjs/server'
 // OR: import { createClerkClient } from '@clerk/backend'
 
-await clerkClient.users.updateUser(userId, {
-  publicMetadata: { plan: 'pro', onboarded: true },   // readable by client, writable server-only
+await clerkClient.users.updateMetadata(userId, {
+  publicMetadata: { plan: 'pro', onboarded: true },   // readable by client, writable server-only; merged, not replaced
   // privateMetadata: { stripeId: 'cus_xxx' },         // server-only read AND write
   // unsafeMetadata: { step: 'welcome' },              // client-writable, avoid sensitive data
 })
@@ -167,7 +169,12 @@ Returns: User object
 **Update user**
 ```
 PATCH /v1/users/{user_id}
-Body (JSON, snake_case): { public_metadata, private_metadata, unsafe_metadata, first_name, last_name, username, ... }
+Body (JSON, snake_case): { first_name, last_name, username, ... }
+```
+As of API version 2026-05-12, this endpoint rejects `public_metadata` / `private_metadata` / `unsafe_metadata`. Use the dedicated metadata endpoints instead:
+```
+PATCH /v1/users/{user_id}/metadata   — deep-merges the supplied metadata into the existing value
+PUT   /v1/users/{user_id}/metadata   — replaces the supplied metadata fields entirely
 ```
 
 **Delete user — IRREVERSIBLE**
@@ -275,20 +282,23 @@ Use the output to determine the latest version and available tags.
 
 ### Metadata Overwrites (Not Merges)
 
-`updateUser({ publicMetadata: { role: 'admin' } })` REPLACES all public metadata, not merges. To add a field without losing existing data: read first, spread, then write.
+The raw `PUT /v1/users/{user_id}/metadata` endpoint REPLACES the supplied metadata fields entirely, not merges. For a partial update, use `PATCH /v1/users/{user_id}/metadata` instead — it deep-merges the supplied metadata into the existing value (nested objects merge too; set a key to `null` to remove it).
 
-Wrong:
-```typescript
-await clerkClient.users.updateUser(userId, { publicMetadata: { newField: 'value' } })
+Wrong (replaces the whole field):
+```bash
+curl -s -X PUT "https://api.clerk.com/v1/users/${USER_ID}/metadata" \
+  -H "Authorization: Bearer $CLERK_SECRET_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"public_metadata": {"newField": "value"}}'
 ```
-This DELETES all other `publicMetadata` fields.
+This DELETES all other `public_metadata` fields.
 
-Right:
-```typescript
-const user = await clerkClient.users.getUser(userId)
-await clerkClient.users.updateUser(userId, {
-  publicMetadata: { ...user.publicMetadata, newField: 'value' },
-})
+Right (merges into the existing value):
+```bash
+curl -s -X PATCH "https://api.clerk.com/v1/users/${USER_ID}/metadata" \
+  -H "Authorization: Bearer $CLERK_SECRET_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"public_metadata": {"newField": "value"}}'
 ```
 
 ---

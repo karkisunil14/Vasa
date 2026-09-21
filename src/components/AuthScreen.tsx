@@ -180,14 +180,22 @@ export function AuthScreen({ mode }: AuthScreenProps) {
     setSocialLoading(provider);
 
     try {
-      const { createdSessionId, setActive } = await startSSOFlow({
+      const { createdSessionId, setActive, signUp } = await startSSOFlow({
         strategy: OAUTH_STRATEGY[provider],
       });
 
       if (createdSessionId && setActive) {
         await setActive({ session: createdSessionId });
         router.replace("/");
+        return;
       }
+
+      if (signUp?.status === "missing_requirements") {
+        setFormError(
+          "This account needs a bit more info to finish signing up. Please continue with email instead.",
+        );
+      }
+      // No createdSessionId and no missing requirements → user cancelled the browser flow; do nothing.
     } catch (error) {
       setFormError(getMessage(error));
     } finally {
