@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useClerk } from "@clerk/expo";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,8 +8,7 @@ export default function Profile() {
   const { signOut } = useClerk();
   const clearSelectedLanguage = useLanguageStore((state) => state.clearSelectedLanguage);
 
-  const handleClearLanguage = async () => {
-    await AsyncStorage.clear();
+  const handleClearLanguage = () => {
     clearSelectedLanguage();
   };
 

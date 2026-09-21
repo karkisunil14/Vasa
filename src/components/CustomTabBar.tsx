@@ -77,6 +77,9 @@ export function CustomTabBar({ state, descriptors, navigation, insets }: BottomT
           <Pressable
             key={route.key}
             onPress={onPress}
+            accessibilityRole="tab"
+            accessibilityLabel={label}
+            accessibilityState={{ selected: focused }}
             className="flex-1 items-center justify-center gap-1"
           >
             {options.tabBarIcon?.({

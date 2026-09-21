@@ -39,7 +39,7 @@ clerk users open user_abc123 --print     # print the URL instead of opening
 # running the real command.
 clerk users create \
   --email alice@example.com \
-  --password 'SuperSecret123!' \
+  --password "$TEMP_USER_PASSWORD" \
   --first-name Alice \
   --last-name Doe \
   --dry-run
@@ -47,7 +47,7 @@ clerk users create \
 # After confirming the preview looks right:
 clerk users create \
   --email alice@example.com \
-  --password 'SuperSecret123!' \
+  --password "$TEMP_USER_PASSWORD" \
   --first-name Alice \
   --last-name Doe \
   --yes

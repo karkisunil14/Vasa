@@ -80,7 +80,9 @@ fi
 # Base URL: use CLERK_BACKEND_API_URL if set, otherwise default to production.
 # Normalize to end in exactly one /v1, whether or not the override already includes it.
 _raw_base="${CLERK_BACKEND_API_URL:-https://api.clerk.com}"
-_raw_base="${_raw_base%/}"
+while [[ "$_raw_base" == */ ]]; do
+  _raw_base="${_raw_base%/}"
+done
 case "$_raw_base" in
   */v1) BASE_URL="$_raw_base" ;;
   *) BASE_URL="${_raw_base}/v1" ;;

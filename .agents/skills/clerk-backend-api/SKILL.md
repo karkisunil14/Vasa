@@ -109,7 +109,7 @@ curl -s -X PATCH "https://api.clerk.com/v1/users/${USER_ID}/metadata" \
 import { clerkClient } from '@clerk/nextjs/server'
 // OR: import { createClerkClient } from '@clerk/backend'
 
-await clerkClient.users.updateMetadata(userId, {
+await clerkClient.users.updateUserMetadata(userId, {
   publicMetadata: { plan: 'pro', onboarded: true },   // readable by client, writable server-only; merged, not replaced
   // privateMetadata: { stripeId: 'cus_xxx' },         // server-only read AND write
   // unsafeMetadata: { step: 'welcome' },              // client-writable, avoid sensitive data

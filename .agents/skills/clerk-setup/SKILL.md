@@ -305,7 +305,7 @@ Also import the shadcn CSS in your global styles:
 | Missing middleware matcher | Include API routes: `matcher: ['/((?!.*\\..*\|_next).*)', '/']` |
 | ClerkProvider placement | Must be inside `<body>` in root layout (Core 2: could wrap `<html>`) |
 | Auth routes not public | Allow `/sign-in`, `/sign-up` in middleware config |
-| Landing page requires auth | To keep "/" public, exclude it: `matcher: ['/((?!.*\\..*\|_next\|^/$).*)', '/api/(.*)']` |
+| Landing page requires auth | Don't try to exclude "/" via the `matcher` regex — the leading slash is already consumed there, so a `^/$` alternative never matches. Instead keep "/" public inside `clerkMiddleware` with `createRouteMatcher(['/'])` and skip `auth.protect()` for it |
 | Wrong import path | Server code uses `@clerk/nextjs/server`, client uses `@clerk/nextjs` |
 | Wrong package name | Use `@clerk/react` not `@clerk/clerk-react` (Core 2 naming) |
 
